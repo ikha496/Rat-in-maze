@@ -19,7 +19,7 @@ public class JavaApplication1 {
     public static void main(String[] args) {
         // TODO code application logic here
         int n[][]= new int [8][8];
-        
+        System.out.println("hey");
         System.out.println(n);
     }
     
