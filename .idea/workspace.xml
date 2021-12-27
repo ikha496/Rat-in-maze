@@ -19,7 +19,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -29,6 +29,26 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Level 2\PL2\Java\Rat-in-maze\src" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="grid" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="javaapplication1.grid" />
+      <module name="Rat-in-maze" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="javaapplication1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.grid" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -40,6 +60,7 @@
       <updated>1639869678755</updated>
       <workItem from="1639869681158" duration="439000" />
       <workItem from="1639870361049" duration="7000" />
+      <workItem from="1640638008352" duration="490000" />
     </task>
     <servers />
   </component>

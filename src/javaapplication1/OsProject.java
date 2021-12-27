@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package osproject;
+package javaapplication1;
 
 import java.util.Scanner;
+
 
 /**
  *
@@ -19,10 +20,10 @@ public class OsProject {
     public static void main(String[] args) {
 
         Scanner inp = new Scanner(System.in);
-        int N=inp.nextInt();
+        int N=grid.n;
         IRatMaze rat = new RatMaze(N);
         
-        int maze[][]= new int[N][N];
+        int maze[][]= grid.arr;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 maze[i][j] = inp.nextInt();

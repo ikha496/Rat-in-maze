@@ -1,4 +1,4 @@
-package osproject;
+package javaapplication1;
 
 public class RaceConditionRunnable implements Runnable{
     private int[][]maze;

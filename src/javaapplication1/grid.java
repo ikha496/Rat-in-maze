@@ -11,7 +11,8 @@ import javax.swing.*;
 public class grid extends javax.swing.JFrame {
 
     //number of cells
-    int n = 8;
+    public static int n;
+    public static int[][] arr = new int [n][n];
     private Container content;
     //cells
     private JButton[][] cells = new JButton[n][n];
@@ -62,6 +63,7 @@ public class grid extends javax.swing.JFrame {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 cells[i][j] = new JButton();
+                arr[i][j]=0;
                 cells[i][j].setBackground(notSelected);
 
                 if (i == 0 && j == 0) {
@@ -102,8 +104,10 @@ public class grid extends javax.swing.JFrame {
                     if (source == cells[i][j]) {
                         if (cells[i][j].getBackground() == selected) {
                             cells[i][j].setBackground(notSelected);
+                            arr[i][j]=0;
                         } else if (cells[i][j].getBackground() == notSelected) {
                             cells[i][j].setBackground(selected);
+                            arr[i][j]=1;
                         }
                         return;
                     }
@@ -140,6 +144,7 @@ public class grid extends javax.swing.JFrame {
             public void run() {
                 new grid().setVisible(true);
             }
+
         });
     }
 
