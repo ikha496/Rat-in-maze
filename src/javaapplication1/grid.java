@@ -11,11 +11,11 @@ import javax.swing.*;
 public class grid extends javax.swing.JFrame {
 
     //number of cells
-    public static int n=4;
-    public static int[][]arr;
+    public static int n = 4;
+    public static int[][] arr;
     private Container content;
     //cells
-    private JButton[][]cells;
+    private JButton[][] cells;
 
     //colors
     private Color selected = Color.GRAY;
@@ -36,7 +36,7 @@ public class grid extends javax.swing.JFrame {
             }
         };
         num.setAction(action);
-        
+
         content.add(no);
         content.add(num);
         setSize(350, 80);
@@ -50,13 +50,13 @@ public class grid extends javax.swing.JFrame {
      * Creates new form grid
      */
     public void gridGen(int num) {
-        n=num;
-         arr = new int [n][n];
-          cells = new JButton[n][n];
+        n = num;
+        arr = new int[n][n];
+        cells = new JButton[n][n];
         initComponents();
         content.removeAll();
         content = getContentPane();
-        content.setLayout(new GridLayout(n+1, n));
+        content.setLayout(new GridLayout(n + 1, n));
 
         //event handler
         ButtonHandler buttonHandler = new ButtonHandler();
@@ -65,7 +65,7 @@ public class grid extends javax.swing.JFrame {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 cells[i][j] = new JButton();
-                arr[i][j]=0;
+                arr[i][j] = 0;
                 cells[i][j].setBackground(notSelected);
 
                 if (i == 0 && j == 0) {
@@ -86,7 +86,7 @@ public class grid extends javax.swing.JFrame {
                 cells[i][j].addActionListener(buttonHandler);
             }
         }
-        JButton Start=new JButton("START");
+        JButton Start = new JButton("START");
         content.add(Start);
         setSize(750, 750);
         setResizable(false);
@@ -106,16 +106,28 @@ public class grid extends javax.swing.JFrame {
                     if (source == cells[i][j]) {
                         if (cells[i][j].getBackground() == selected) {
                             cells[i][j].setBackground(notSelected);
-                            arr[i][j]=0;
+                            arr[i][j] = 0;
                         } else if (cells[i][j].getBackground() == notSelected) {
                             cells[i][j].setBackground(selected);
-                            arr[i][j]=1;
+                            arr[i][j] = 1;
                         }
                         return;
                     }
 
                 }
             }
+        }
+
+    }
+
+    private class StartAction implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Object source = e.getSource();
+            IRatMaze rat = new RatMaze(n);
+            rat.solveMaze(arr);
+            
         }
 
     }
