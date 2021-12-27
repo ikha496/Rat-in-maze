@@ -12,15 +12,18 @@ public class grid extends javax.swing.JFrame {
 
     //number of cells
     public static int n = 4;
-    public static int[][] arr;
+    public static int[][] blocks;
+    public static int [][] sol;
+
     private Container content;
     //cells
-    private JButton[][] cells;
+    public static JButton[][] cells;
 
     //colors
     private Color selected = Color.GRAY;
     private Color StartEnd = Color.BLACK;
     private Color notSelected = Color.WHITE;
+    public static Color SolColor= Color.BLUE;
 
     public grid() {
         super("Rat Maze");
@@ -51,8 +54,9 @@ public class grid extends javax.swing.JFrame {
      */
     public void gridGen(int num) {
         n = num;
-        arr = new int[n][n];
+        blocks = new int[n][n];
         cells = new JButton[n][n];
+        sol = new int[n][n];
         initComponents();
         content.removeAll();
         content = getContentPane();
@@ -65,7 +69,7 @@ public class grid extends javax.swing.JFrame {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 cells[i][j] = new JButton();
-                arr[i][j] = 0;
+                blocks[i][j] = 1;
                 cells[i][j].setBackground(notSelected);
 
                 if (i == 0 && j == 0) {
@@ -76,7 +80,6 @@ public class grid extends javax.swing.JFrame {
                     cells[i][j].setBackground(StartEnd);
                     cells[i][j].setText("END");
                     cells[i][j].setForeground(Color.WHITE);
-
                 }
 //                else{
 //                    cells[i][j]= new JButton();
@@ -86,8 +89,10 @@ public class grid extends javax.swing.JFrame {
                 cells[i][j].addActionListener(buttonHandler);
             }
         }
+        StartAction startAction = new StartAction();
         JButton Start = new JButton("START");
         content.add(Start);
+        Start.addActionListener(startAction);
         setSize(750, 750);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -106,10 +111,10 @@ public class grid extends javax.swing.JFrame {
                     if (source == cells[i][j]) {
                         if (cells[i][j].getBackground() == selected) {
                             cells[i][j].setBackground(notSelected);
-                            arr[i][j] = 0;
+                            blocks[i][j] = 1;
                         } else if (cells[i][j].getBackground() == notSelected) {
                             cells[i][j].setBackground(selected);
-                            arr[i][j] = 1;
+                            blocks[i][j] = 0;
                         }
                         return;
                     }
@@ -125,8 +130,11 @@ public class grid extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
-            IRatMaze rat = new RatMaze(n);
-            rat.solveMaze(arr);
+
+            RunnableRatMaze runnableRatMaze=new RunnableRatMaze(blocks);
+            Thread t=new Thread(runnableRatMaze);
+            t.start();
+
             
         }
 

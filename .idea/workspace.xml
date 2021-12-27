@@ -21,13 +21,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Level 2\PL2\Java\Rat-in-maze\src" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="javaapplication1" />
     </key>
   </component>
   <component name="RunManager">

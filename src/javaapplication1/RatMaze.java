@@ -1,23 +1,30 @@
 package javaapplication1;
 
-import java.util.concurrent.locks.ReentrantLock;
-
 public class RatMaze implements IRatMaze{
 
     // Size of the maze
     static int N;
-    //lock to control sol[][]
-    private ReentrantLock lock;
+    static int sol[][];
 
     public RatMaze(int n){
         N = n;
-        lock=new ReentrantLock();
     }
 
     /* A utility function to print
 	solution matrix sol[N][N] */
     @Override
     public void printSolution(int sol[][]) {
+        grid.sol=sol;
+        for(int i=0; i<grid.n;i++){
+            for(int j=0;j<grid.n;j++){
+                if((i==0&&j==0)||(i==grid.n-1&&j==grid.n-1)){
+                    continue;
+                }
+                if(sol[i][j]==1){
+                    grid.cells[i][j].setBackground(grid.SolColor);
+                }
+            }
+        }
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 System.out.print(
@@ -45,7 +52,7 @@ public class RatMaze implements IRatMaze{
 	function prints one of the feasible solutions.*/
     @Override
     public boolean solveMaze(int[][] maze) {
-        int sol[][] = new int[N][N];
+        sol = new int[N][N];
 
         if (!solveMazeUtil(maze, 0, 0, sol)) {
             System.out.print("Solution doesn't exist");
@@ -74,45 +81,24 @@ public class RatMaze implements IRatMaze{
             }
 
             // mark x, y as part of solution path
-            lock.lock();
-            try {
                 sol[x][y] = 1;
-            }finally {
-                lock.unlock();
-            }
-
-            /* Move forward and down by one more thread */
-            if (isSafe(maze,x+1,y)&&isSafe(maze,x,y+1)){
-               if(solveMazeUtil(maze, x + 1, y, sol)){
-                   return true;
-               }
-
-                RaceConditionRunnable runnable = new RaceConditionRunnable(maze,x,y+1,sol,this);
-                Thread thread = new Thread(runnable);
-                thread.start();
-
-            }
 
             /* Move forward in x direction */
-            else if (solveMazeUtil(maze, x + 1, y, sol)) {
+
+                if (solveMazeUtil(maze, x+1, y, sol)) {
                 return true;
-            }
+                }
 
             /* If moving in x direction doesn't give
 			solution then Move down in y direction */
-            else if (solveMazeUtil(maze, x, y + 1, sol)) {
+                if (solveMazeUtil(maze, x, y+1, sol)) {
                 return true;
-            }
+                }
 
             /* If none of the above movements works then
 			BACKTRACK: unmark x, y as part of solution
 			path */
-            lock.lock();
-            try {
-                sol[x][y] = 0;
-            }finally {
-                lock.unlock();
-            }
+            sol[x][y] = 0;
             return false;
         }
         return false;
