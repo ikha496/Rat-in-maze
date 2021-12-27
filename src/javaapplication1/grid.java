@@ -11,11 +11,11 @@ import javax.swing.*;
 public class grid extends javax.swing.JFrame {
 
     //number of cells
-    public static int n;
-    public static int[][] arr = new int [n][n];
+    public static int n=4;
+    public static int[][]arr;
     private Container content;
     //cells
-    private JButton[][] cells = new JButton[n][n];
+    private JButton[][]cells;
 
     //colors
     private Color selected = Color.GRAY;
@@ -51,6 +51,8 @@ public class grid extends javax.swing.JFrame {
      */
     public void gridGen(int num) {
         n=num;
+         arr = new int [n][n];
+          cells = new JButton[n][n];
         initComponents();
         content.removeAll();
         content = getContentPane();
