@@ -11,7 +11,7 @@ import javax.swing.*;
 public class grid extends javax.swing.JFrame {
 
     //number of cells
-    public static int n = 4;
+    public static int n ;
     public static int[][] blocks;
     public static int [][] sol;
 
@@ -64,6 +64,7 @@ public class grid extends javax.swing.JFrame {
 
         //event handler
         ButtonHandler buttonHandler = new ButtonHandler();
+        StartAction startAction = new StartAction();
 
         //creat the grid board
         for (int i = 0; i < n; i++) {
@@ -89,7 +90,6 @@ public class grid extends javax.swing.JFrame {
                 cells[i][j].addActionListener(buttonHandler);
             }
         }
-        StartAction startAction = new StartAction();
         JButton Start = new JButton("START");
         content.add(Start);
         Start.addActionListener(startAction);
@@ -129,13 +129,9 @@ public class grid extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            Object source = e.getSource();
-
             RunnableRatMaze runnableRatMaze=new RunnableRatMaze(blocks);
             Thread t=new Thread(runnableRatMaze);
             t.start();
-
-            
         }
 
     }
