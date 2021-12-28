@@ -11,19 +11,19 @@ import javax.swing.*;
 public class grid extends javax.swing.JFrame {
 
     //number of cells
-    public static int n ;
+    public static int n;
     public static int[][] blocks;
-    public static int [][] sol;
+    public static int[][] sol;
 
     private Container content;
     //cells
     public static JButton[][] cells;
 
     //colors
-    private Color selected = Color.GRAY;
-    private Color StartEnd = Color.BLACK;
-    private Color notSelected = Color.WHITE;
-    public static Color SolColor= Color.BLUE;
+    public static Color selected = Color.GRAY;
+    public static Color StartEnd = Color.BLACK;
+    public static Color notSelected = Color.WHITE;
+    public static Color SolColor = Color.BLUE;
 
     public grid() {
         super("Rat Maze");
@@ -93,11 +93,39 @@ public class grid extends javax.swing.JFrame {
         JButton Start = new JButton("START");
         content.add(Start);
         Start.addActionListener(startAction);
+        JButton reset = new JButton("RESET");
+        content.add(reset);
+        Action resetAction = new AbstractAction("reset") {
+            public void actionPerformed(ActionEvent e) {
+                resetGrid();
+            }
+        };
+        reset.setAction(resetAction);
+
         setSize(750, 750);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
 
+    }
+
+    public static void resetGrid() {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i == 0 && j == 0) || (i == n - 1 && j == n - 1)) {
+                    continue;
+                }
+                blocks[i][j] = 1;
+                cells[i][j].setBackground(notSelected);
+
+            }
+        }
+    }
+
+    public static void noSol() {
+        String msg = "There is no solutions";
+        JOptionPane.showMessageDialog(null, msg, "No Solution", JOptionPane.INFORMATION_MESSAGE);
+        resetGrid();
     }
 
     private class ButtonHandler implements ActionListener {
@@ -129,8 +157,8 @@ public class grid extends javax.swing.JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            RunnableRatMaze runnableRatMaze=new RunnableRatMaze(blocks);
-            Thread t=new Thread(runnableRatMaze);
+            RunnableRatMaze runnableRatMaze = new RunnableRatMaze(blocks);
+            Thread t = new Thread(runnableRatMaze);
             t.start();
         }
 

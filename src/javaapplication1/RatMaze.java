@@ -55,7 +55,8 @@ public class RatMaze implements IRatMaze{
         sol = new int[N][N];
 
         if (!solveMazeUtil(maze, 0, 0, sol)) {
-            System.out.print("Solution doesn't exist");
+            System.out.println("Solution doesn't exist");
+            grid.noSol();
             return false;
         }
 
